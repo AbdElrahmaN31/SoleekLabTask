@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Soleek Lab Task</string>
+    <string name="already_have_an_account_login">Already have an account</string>
+    <string name="sign_up">Register</string>
+    <string name="text_login">LOGIN</string>
+    <string name="text_register">REGISTER</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
 </resources>
