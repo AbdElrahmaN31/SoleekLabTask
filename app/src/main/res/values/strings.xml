@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Soleek Lab Task</string>
     <string name="already_have_an_account_login">Already have an account</string>
+    <string name="dont_have_an_account">Don\'t have an account</string>
     <string name="sign_up">Register</string>
     <string name="text_login">LOGIN</string>
     <string name="text_register">REGISTER</string>

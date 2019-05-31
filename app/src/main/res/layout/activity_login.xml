@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/_24sdp"
     android:paddingTop="@dimen/_24sdp"
     android:paddingRight="@dimen/_24sdp"
-    tools:context=".RegisterActivity">
+    tools:context=".LoginActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_below="@id/image_logo"
             android:layout_marginBottom="@dimen/_16sdp"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/text_register"
+            android:text="@string/text_login"
             android:textColor="@color/white"
             android:textSize="@dimen/_24ssp" />
 
@@ -46,18 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_login"
             android:orientation="vertical">
-
-            <android.support.design.widget.TextInputLayout
-                style="@style/TextInputLayout"
-                android:hint="@string/name">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edit_register_name"
-                    style="@style/TextInputEditText"
-                    android:drawableStart="@drawable/ic_perm_identity_black_24dp"
-                    android:drawableLeft="@drawable/ic_perm_identity_black_24dp" />
-            </android.support.design.widget.TextInputLayout>
-
 
             <android.support.design.widget.TextInputLayout
                 style="@style/TextInputLayout"
@@ -86,59 +74,43 @@
                     android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                style="@style/TextInputLayout"
-                android:hint="@string/confirm_password"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/white">
-
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edit_register_confirm_password"
-                    style="@style/TextInputEditText"
-                    android:drawableStart="@drawable/ic_password_outline_black_24dp"
-                    android:drawableLeft="@drawable/ic_password_outline_black_24dp"
-                    android:inputType="textPassword" />
-
-            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_below="@+id/layout_section1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_32sdp"
             android:background="@drawable/view_background"
             android:fontFamily="sans-serif-medium"
             android:paddingLeft="@dimen/_70sdp"
             android:paddingRight="@dimen/_70sdp"
-            android:text="@string/register"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
         <LinearLayout
-            android:id="@+id/layout_register_login"
+            android:id="@+id/layout_login_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/btn_register"
+            android:layout_below="@id/btn_login"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="@dimen/_16sdp"
             android:gravity="center">
 
             <TextView
-                android:id="@+id/text_register_have_account"
+                android:id="@+id/text_login_have_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/already_have_an_account_login"
+                android:text="@string/dont_have_an_account"
                 android:textColor="#d9e5f3" />
 
             <ImageView
-                android:id="@+id/image_register_register"
+                android:id="@+id/image_login_register"
                 android:layout_width="@dimen/_12sdp"
                 android:layout_height="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_4sdp"

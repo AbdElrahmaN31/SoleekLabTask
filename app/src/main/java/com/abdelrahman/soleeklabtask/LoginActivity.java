@@ -11,59 +11,50 @@ import android.widget.ScrollView;
 import com.abdelrahman.soleeklabtask.Utils.IntentUtil;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
-import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 import com.mobsandgeeks.saripaar.annotation.Pattern;
 
 import java.util.List;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Validator.ValidationListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Validator.ValidationListener {
+
 
     private static final String EMAIL_ADDRESS_PATTERN = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
     @Pattern(regex = EMAIL_ADDRESS_PATTERN, message = "Input does not match email pattern")
-    private TextInputEditText mEditTextNewEmail;
-    @NotEmpty
-    private TextInputEditText mEditTextNewUser;
+    private TextInputEditText mEditTextEmail;
     @Password(min = 8, message = "Password minimum length is 8")
-    private TextInputEditText mEditTextNewPassword;
-    @ConfirmPassword
-    private TextInputEditText mEditTextConfirmPassword;
-    private Button mButtonRegister;
-    private LinearLayout mLayoutLogin;
-    private ScrollView mLayoutRegister;
+    private TextInputEditText mEditTextPassword;
+    private Button mButtonLogin;
+    private LinearLayout mLayoutRegister;
+    private ScrollView mLayoutLogin;
     private Validator mValidator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
-        mEditTextNewUser = findViewById(R.id.edit_register_name);
-        mEditTextNewEmail = findViewById(R.id.edit_login_email);
-        mEditTextNewPassword = findViewById(R.id.edit_login_password);
-        mEditTextConfirmPassword = findViewById(R.id.edit_register_confirm_password);
+        mEditTextEmail = findViewById(R.id.edit_login_email);
+        mEditTextPassword = findViewById(R.id.edit_login_password);
 
-        mButtonRegister = findViewById(R.id.btn_register);
-        mLayoutLogin = findViewById(R.id.layout_register_login);
+        mButtonLogin = findViewById(R.id.btn_login);
+        mLayoutRegister = findViewById(R.id.layout_login_register);
 
         mValidator = new Validator(this);
         mValidator.setValidationListener(this);
 
-        mButtonRegister.setOnClickListener(this);
-        mLayoutLogin.setOnClickListener(this);
-
-
+        mButtonLogin.setOnClickListener(this);
+        mLayoutRegister.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_register:
+            case R.id.btn_login:
                 mValidator.validate(true);
                 break;
-            case R.id.layout_register_login:
-                IntentUtil.makeIntent(this, LoginActivity.class);
+            case R.id.layout_login_register:
+                IntentUtil.makeIntent(this, RegisterActivity.class);
                 break;
         }
     }
