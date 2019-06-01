@@ -95,19 +95,13 @@
 
         <Button
             android:id="@+id/btn_register"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_32sdp"
+            style="@style/Button"
             android:layout_below="@+id/layout_section1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:background="@drawable/view_background"
             android:fontFamily="sans-serif-medium"
             android:paddingLeft="@dimen/_70sdp"
             android:paddingRight="@dimen/_70sdp"
-            android:text="@string/register"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp" />
+            android:text="@string/register" />
 
         <LinearLayout
             android:id="@+id/layout_register_login"

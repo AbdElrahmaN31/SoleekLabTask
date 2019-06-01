@@ -78,18 +78,10 @@
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_32sdp"
+                style="@style/Button"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_24sdp"
-                android:background="@drawable/view_background"
                 android:fontFamily="sans-serif-medium"
-                android:paddingLeft="@dimen/_70sdp"
-                android:paddingRight="@dimen/_70sdp"
-                android:text="@string/login"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_16ssp" />
+                android:text="@string/login" />
         </LinearLayout>
 
 
