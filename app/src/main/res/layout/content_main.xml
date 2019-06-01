@@ -2,9 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/grad_background"
     android:orientation="vertical"
-    android:padding="@dimen/_8sdp">
+    android:paddingStart="@dimen/_8sdp"
+    android:paddingEnd="@dimen/_8sdp"
+    android:paddingBottom="@dimen/_8sdp">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_countries"
@@ -12,11 +15,13 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        tools:listitem="@layout/home_item_list" />
 
     <Button
         android:id="@+id/btn_logout"
         style="@style/Button"
+        android:layout_marginTop="@dimen/_8sdp"
         android:layout_gravity="bottom|center"
         android:text="@string/logout" />
 </LinearLayout>

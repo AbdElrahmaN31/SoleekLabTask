@@ -1,4 +1,4 @@
-package com.abdelrahman.soleeklabtask.Utils;
+package com.abdelrahman.soleeklabtask.utils;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;

@@ -1,4 +1,4 @@
-package com.abdelrahman.soleeklabtask.Utils;
+package com.abdelrahman.soleeklabtask.utils;
 
 import android.app.Activity;
 import android.content.Context;

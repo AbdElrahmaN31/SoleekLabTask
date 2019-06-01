@@ -1,10 +1,11 @@
-package com.abdelrahman.soleeklabtask;
+package com.abdelrahman.soleeklabtask.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.abdelrahman.soleeklabtask.Utils.IntentUtil;
+import com.abdelrahman.soleeklabtask.R;
+import com.abdelrahman.soleeklabtask.utils.IntentUtil;
 
 public class SplashActivity extends AppCompatActivity {
 

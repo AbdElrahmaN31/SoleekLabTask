@@ -1,4 +1,4 @@
-package com.abdelrahman.soleeklabtask;
+package com.abdelrahman.soleeklabtask.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,8 +11,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.abdelrahman.soleeklabtask.Utils.IntentUtil;
-import com.abdelrahman.soleeklabtask.Utils.SnackBarUtil;
+import com.abdelrahman.soleeklabtask.R;
+import com.abdelrahman.soleeklabtask.utils.IntentUtil;
+import com.abdelrahman.soleeklabtask.utils.SnackBarUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.abdelrahman.soleeklabtask"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -28,11 +28,22 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     // UI validation
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
-
+    // Customize size
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     //Firebase
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.caverock:androidsvg:1.2.1'
+    implementation 'com.caverock:androidsvg:1.2.1'
+    
 }
 apply plugin: 'com.google.gms.google-services'
