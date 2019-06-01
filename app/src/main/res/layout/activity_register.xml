@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/_24sdp"
     android:paddingTop="@dimen/_24sdp"
     android:paddingRight="@dimen/_24sdp"
-    tools:context=".RegisterActivity">
+    tools:context=".activity.RegisterActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"

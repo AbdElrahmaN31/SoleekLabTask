@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/_24sdp"
     android:paddingTop="@dimen/_24sdp"
     android:paddingRight="@dimen/_24sdp"
-    tools:context=".LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -75,31 +75,63 @@
                     android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@drawable/view_background"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="@dimen/_70sdp"
+                android:paddingRight="@dimen/_70sdp"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_below="@+id/layout_section1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_32sdp"
-            android:background="@drawable/view_background"
-            android:fontFamily="sans-serif-medium"
-            android:paddingLeft="@dimen/_70sdp"
-            android:paddingRight="@dimen/_70sdp"
-            android:text="@string/login"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp" />
+
+        <LinearLayout
+            android:id="@+id/layout_section2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_section1"
+            android:layout_marginTop="15dp">
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/button_google_sign_in"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_weight="1" />
+
+            <!--<com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/login_With_facebook"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:height="@dimen/_320sdp"-->
+            <!--android:minHeight="@dimen/_320sdp" />-->
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_or"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_section2"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:gravity="center"
+            android:text="@string/or"
+            android:textColor="@color/colorPrimaryDark" />
+
 
         <LinearLayout
             android:id="@+id/layout_login_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/btn_login"
+            android:layout_below="@id/text_or"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/_16sdp"
             android:gravity="center">
 
             <TextView
