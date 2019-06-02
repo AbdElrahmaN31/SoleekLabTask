@@ -98,13 +98,13 @@
                 android:layout_height="@dimen/_32sdp"
                 android:layout_weight="1" />
 
-            <!--<com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"-->
-            <!--android:id="@+id/login_With_facebook"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:height="@dimen/_320sdp"-->
-            <!--android:minHeight="@dimen/_320sdp" />-->
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_With_facebook"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:height="@dimen/_320sdp"
+                android:minHeight="@dimen/_320sdp" />
         </LinearLayout>
 
         <TextView

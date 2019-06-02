@@ -15,14 +15,13 @@ import android.widget.ScrollView;
 import com.abdelrahman.soleeklabtask.R;
 import com.abdelrahman.soleeklabtask.utils.IntentUtil;
 import com.abdelrahman.soleeklabtask.utils.SnackBarUtil;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +37,7 @@ import com.mobsandgeeks.saripaar.annotation.Pattern;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener,
-        Validator.ValidationListener {
+        Validator.ValidationListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
@@ -52,8 +51,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ScrollView mLayoutLogin;
     private Validator mValidator;
     private FirebaseAuth mAuth;
-    private GoogleSignInClient googleSignInClient;
-    private GoogleApiClient googleApiClient;
+    private GoogleSignInClient mGoogleSignInClient;
+    //    private GoogleApiClient mGoogleApiClient;
     private SignInButton mGoogleSignInButton;
 
     @Override
@@ -72,6 +71,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         configureGoogleSignIn();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        checkAuth();
     }
 
     private void checkAuth() {
@@ -102,17 +108,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .requestEmail()
                 .build();
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        googleApiClient = new GoogleApiClient.Builder(getApplicationContext()).enableAutoManage(
-                this, new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        SnackBarUtil.makeSnackBar(getApplicationContext(), mLayoutLogin, "Connection failed !", Snackbar.LENGTH_SHORT);
-                    }
-                }
-        ).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
-
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
 
@@ -144,7 +140,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             IntentUtil.makeIntent(LoginActivity.this, HomeActivity.class);
                         } else {
@@ -157,40 +152,80 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Log.d(TAG, "onActivityResult, request code is: " + requestCode + " result code is: " + resultCode );
+//        Log.d(TAG, "onActivityResult, " + data.getDataString());
+//        if(requestCode == RC_SIGN_IN){
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            if(result.isSuccess()){
+//                GoogleSignInAccount account = result.getSignInAccount();
+//                authWithGoogle(account);
+//            }
+//        }
+//    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult, request code is: " + requestCode + " result code is: " + resultCode);
+        Log.d(TAG, "onActivityResult, " + data.getDataString());
+//         Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                GoogleSignInAccount account = result.getSignInAccount();
-                if (account != null) {
-                    authWithGoogle(account);
-                }
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign ... in failed", e);
             }
         }
     }
 
-    private void authWithGoogle(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    IntentUtil.makeIntent(LoginActivity.this, HomeActivity.class);
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithGoogle:failure", task.getException());
-                    SnackBarUtil.makeSnackBar(getApplicationContext(), mLayoutLogin, "Authentication failed !", Snackbar.LENGTH_SHORT);
+//    private void authWithGoogle(GoogleSignInAccount account) {
+//        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
+//        mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                Log.d(TAG, "signInWithGoogle:complete");
+//                if(task.isSuccessful()){
+//                    Log.d(TAG, "signInWithGoogle:successful");
+//                    IntentUtil.makeIntent(LoginActivity.this, HomeActivity.class);
+//                }
+//                else{
+//                    Log.w(TAG, "signInWithGoogle:failure", task.getException());
+//                    SnackBarUtil.makeSnackBar(getApplicationContext(), mLayoutLogin, "Authentication failed !",
+//                            Snackbar.LENGTH_SHORT);
+//                }
+//            }
+//        });
+//    }
 
-                }
-            }
-        });
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            checkAuth();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            SnackBarUtil.makeSnackBar(LoginActivity.this, mLayoutLogin, "Authentication Failed.", Snackbar.LENGTH_SHORT);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -206,4 +241,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.w(TAG, "connectionWithEmail:failed, " + connectionResult.getErrorMessage());
+    }
 }
