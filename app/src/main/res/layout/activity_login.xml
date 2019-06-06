@@ -95,16 +95,18 @@
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/button_google_sign_in"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1" />
 
+
             <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_With_facebook"
+                android:id="@+id/buttonFacebookLogin"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:height="@dimen/_320sdp"
-                android:minHeight="@dimen/_320sdp" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/_12sdp" />
         </LinearLayout>
 
         <TextView

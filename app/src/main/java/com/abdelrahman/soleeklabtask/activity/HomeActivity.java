@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.abdelrahman.soleeklabtask.R;
 import com.abdelrahman.soleeklabtask.adapter.CountryAdapter;
@@ -19,6 +20,10 @@ import com.abdelrahman.soleeklabtask.network.APIClient;
 import com.abdelrahman.soleeklabtask.network.ApiInterface;
 import com.abdelrahman.soleeklabtask.utils.IntentUtil;
 import com.abdelrahman.soleeklabtask.utils.SnackBarUtil;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -101,6 +106,19 @@ public class HomeActivity extends AppCompatActivity {
 
     private void signOut() {
         FirebaseAuth.getInstance().signOut();
+        //Facebook sign out
+        LoginManager.getInstance().logOut();
+
+        // Google sign out
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        // Build a GoogleSignInClient with the options specified by gso.
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(HomeActivity.this, gso);
+        mGoogleSignInClient.signOut();
+
+        Toast.makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
         IntentUtil.makeIntent(this, LoginActivity.class);
     }
 }
